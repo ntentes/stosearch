@@ -1,8 +1,8 @@
-#######################################################################################
-#######################################################################################
-######## Stochastic Search Functions - An R Package by Konstantinos Ntentes ###########
-#######################################################################################
-#######################################################################################
+################################################################################################
+################################################################################################
+######## Stochastic Search Functions - An R Package by Konstantinos Ntentes ####################
+################################################################################################
+################################################################################################
 
 
 
@@ -328,7 +328,11 @@ multisearch_DR_pro <- function(x0 = 20, t = 1000, n = 1e5, det_reset = 200, sear
                    "SearchCost" = t*searchers,
                    "SearchPaths" = search_array,
                    "NumResets" = floor((steps/n)/det_reset*t)*searchers,
-                   "ResetTimes" = seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset)
+                   "ResetTimes" = if (floor((steps/n)/det_reset*t)==0){
+                     NA
+                   } else {
+                     seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset
+                   })
   } else {
     search_array[ , (steps+1):n] <- 0L
     result <- list("TargetFound" = TRUE,
@@ -336,7 +340,11 @@ multisearch_DR_pro <- function(x0 = 20, t = 1000, n = 1e5, det_reset = 200, sear
                    "SearchCost" = steps*(t/n)*searchers,
                    "SearchPaths" = search_array,
                    "NumResets" = floor((steps/n)/det_reset*t)*searchers,
-                   "ResetTimes" = seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset)
+                   "ResetTimes" = if (floor((steps/n)/det_reset*t)==0){
+                     NA
+                   } else {
+                     seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset
+                   })
   }
   return(result)
 }
