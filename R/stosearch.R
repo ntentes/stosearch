@@ -327,11 +327,11 @@ multisearch_DR_pro <- function(x0 = 20, t = 1000, n = 1e5, det_reset = 200, sear
                    "TimeUnits" = t,
                    "SearchCost" = t*searchers,
                    "SearchPaths" = search_array,
-                   "NumResets" = floor((steps/n)/det_reset*t)*searchers,
-                   "ResetTimes" = if (floor((steps/n)/det_reset*t)==0){
-                     NA
+                   "NumResets" = floor(t/det_reset)*searchers,
+                   "ResetTimes" = if ((floor(t/det_reset))>=1) {
+                     (seq(from=1, to=(floor(t/det_reset)), by=1))*det_reset
                    } else {
-                     seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset
+                     NA
                    })
   } else {
     search_array[ , (steps+1):n] <- 0L
@@ -339,11 +339,11 @@ multisearch_DR_pro <- function(x0 = 20, t = 1000, n = 1e5, det_reset = 200, sear
                    "TimeUnits" = steps*(t/n),
                    "SearchCost" = steps*(t/n)*searchers,
                    "SearchPaths" = search_array,
-                   "NumResets" = floor((steps/n)/det_reset*t)*searchers,
-                   "ResetTimes" = if (floor((steps/n)/det_reset*t)==0){
+                   "NumResets" = floor(((steps/n)*t)/det_reset)*searchers,
+                   "ResetTimes" = if (floor(((steps/n)*t)/det_reset)==0){
                      NA
                    } else {
-                     seq(from=1, to=floor((steps/n)/det_reset*t), by=1)*det_reset
+                     seq(from=1, to=floor(((steps/n)*t)/det_reset), by=1)*det_reset
                    })
   }
   return(result)
