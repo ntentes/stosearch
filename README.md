@@ -3,6 +3,8 @@
 
 Stochastic Search Simulation With Resetting
 
+![Example of a Stochastic Search](https://i.imgur.com/KfApyEK.png)
+
 ### Description
 
 This package can be used for brownian motion search simulations and data can be collected for experimentation. This package can also be used for educational purposes, as it provides good visual cues on the mechanics of a stochastic search with resetting.
